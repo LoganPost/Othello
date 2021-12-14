@@ -11,7 +11,7 @@ black tile.`dd`
  - At line 45 of this `main`
    - `debug` activates the pre/post-conditions in each file
    - `reset_settings` resets the game settings in the in-game **"Settings"** screen
- ## FEATURES:
+ ### FEATURES:
  - Look in settings to change anything you want. These changes are saved permanently in a separate file,
    so if you close the game and reopen, it will be saved.
    - Speed is for the animations.
@@ -33,3 +33,12 @@ black tile.`dd`
  - Scorekeepers show current scores
  - Progress bar with animation show current scores and game progress
  - Quit button is always active unless a Bot is thinking.
+## FILES
+- `main` contains the main loop and other functions.
+- `Tile_Class` contains animation classes. This includes `Tile`, which draws the game pieces, `Button`, which draws and holds visual data about the buttons, and `TextBox`, whcih holds display information about text surfaces to be displayed.
+- `Board_Class` is self explanatory. The `Board` object holds the state of the board and has functions which access and mutate information about the game state.
+- `Bot_Class` has a robot object which can look at a board and make decisions based on what it sees. 
+- `Vector_Class` is a subclass of tuple with improved operations for adding/subtracting coordinates and other manipulations.
+- `settings.dat` is a `Pickle` file containing a tuple of saved info from the **"Settings"** screen ingame
+### MAIN
+This file is where the game takes place. First, functions are defined which do well-defined things like make a move, change the board size, or set the scores. Next, all of the colors, settings, buttons, and text boxes are generated for future reference. Finally, the main loop starts. The main loop is separated into event listening, and screen display. First, we listen for clicking events. 
