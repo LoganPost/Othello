@@ -23,7 +23,7 @@ black tile.
    - Bots are slower on larger boards (more possible moves to think about)
  - Bots: Test as much as you like, but each bot typically beats the one below.
    - The lvl 0 bot is different. It chooses a move randomly and won't skip unless forced to.
-   - The lvl 10 bot will be a bit slow, but lvl 8 is more skilled than me and will beat you.
+   - The lvl 10 bot will be a bit slow, but lvl 8 will almost certainly beat you most of the time
  - Undo and Skip can be deactivated (in real life they don't exist)
    - If skip is off, the Bots will avoid skipping unless necessary.
      - If skip is on, Bots will skip if it's strategic, but only a few times in a row before
