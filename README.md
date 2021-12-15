@@ -40,7 +40,7 @@ black tile.
 - `Bot_Class` has a robot object which can look at a board and make decisions based on what it sees. 
 - `Vector_Class` is a subclass of tuple with improved operations for adding/subtracting coordinates and other manipulations.
 - `settings.dat` is a `Pickle` file containing a tuple of saved info from the **"Settings"** screen ingame
-### MAIN
+### [MAIN](main.py)
 This file is where the game takes place. Here, all objects are instantiated and the game is played and rendered.
 
 First, functions are defined which do well-defined things like make a move, change the board size, or set the scores. Next, all of the colors, settings, buttons, and text boxes are generated for future reference. Next, the main loop starts. The main loop is separated into event listening and screen display. 
@@ -48,7 +48,7 @@ First, functions are defined which do well-defined things like make a move, chan
 First, pygame listens for clicking events. There are three possible game states: `game_active`, `settings_open`, and the title screen. Collisions are detected depending on the current game state. At all states, we listen for button presses, but during `game_active`, we check if a board click is valid and if legal, we move there.
 
 Last, the display is updated and animations are moved forward by one step. In each of the game states, different objects are rendered and different animations take place.
-### TILE_CLASS
+### [TILE_CLASS](Tile_Class.py)
 This file has three classes which are used for the creating all of the display effects in the game. 
 - The `Tile` class holds information about the color, location, shape, and animation state of each tile during gameplay
   - The `Board` holds all information about the actual game, but the tiles are the only thing the player can actually see. 
@@ -60,7 +60,7 @@ This file has three classes which are used for the creating all of the display e
   - Text boxes to a lot less, but they hold the text rendering surface and the location rectangle in one
        more convenient place, rather than having separate `text_surf` and `text_rect` objects. Also, the `changeText` method is particularly helpful, because this would
        otherwise require constructing brand new objects from scratch
-### BOARD_CLASS
+### [BOARD_CLASS](Board_Class.py)
  This file contains only the `Board` class and a function which constructs a Board. A board object holds the game state (or hypothetical game states) at any time. It is represented as a list of lists:
  - The Board itself is constructed as a list of rows.
  - Each row is a list of ints indicated a friendly(1), enemy(-1), or no(0) tile
@@ -68,7 +68,7 @@ The logic and rules of the game occur via the functions of this class. These fun
 of whoever's turn it currently is. Thus, a value (1) must **always** mean friendly. For example, the `legalMoves` function tells you all of the moves for whomever is currently playing, and by inverting the board, we can can get all of the moves for the other person.
 
 This board can be copied, reversed, and mutated according to game rules. As a result, board copies are stored in memory for the purpose of undoing moves, hypothetical boards are used by robots to assess possible moves and make predictions.
-### BOT_CLASS
+### [BOT_CLASS](Bot_Class.py)
 This file contains only the `Bot` class. Robot objects hold information about their decision making parameters/priorities. The class
 functions dictate the decision making process for choosing a move on a given `Board`, according to these parameters. The default strategy is to assign a utility to a given board state based which spaces I control versus which spaces the opponent controls. By assuming the opponent also assesses the board this way, we can predict their best move and give the opponent the worst set of options. Parameters include:
 - Whether to prefer corner and edge spaces, and what score multiplier to assign to those spaces
