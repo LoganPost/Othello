@@ -10,7 +10,7 @@ black tile.
  - Run `main` to play.
  - At line 45 of this `main`
    - `debug` activates the pre/post-conditions in each file
-   - `reset_settings` resets the game settings in the in-game **"Settings"** screen
+   - `reset_settings` resets the game settings in the in-game **"Settings"** screen to my recommended settings to see all the features.
  ### FEATURES:
  - Look in settings to change anything you want. These changes are saved permanently in a separate file,
    so if you close the game and reopen, it will be saved.
@@ -60,3 +60,27 @@ This file has three classes which are used for the creating all of the display e
   - Text boxes to a lot less, but they hold the text rendering surface and the location rectangle in one
        more convenient place, rather than having separate `text_surf` and `text_rect` objects. Also, the `changeText` method is particularly helpful, because this would
        otherwise require constructing brand new objects from scratch
+### BOARD_CLASS
+ This file contains only the `Board` class and a function which constructs a Board. A board object holds the game state (or hypothetical game states) at any time. It is represented as a list of lists:
+ - The Board itself is constructed as a list of rows.
+ - Each row is a list of ints indicated a friendly(1), enemy(-1), or no(0) tile
+The logic and rules of the game occur via the functions of this class. These functions only work from the perspective
+of whoever's turn it currently is. Thus, a value (1) must **always** mean friendly. For example, the `legalMoves` function tells you all of the moves for whomever is currently playing, and by inverting the board, we can can get all of the moves for the other person.
+
+This board can be copied, reversed, and mutated according to game rules. As a result, board copies are stored in memory for the purpose of undoing moves, hypothetical boards are used by robots to assess possible moves and make predictions.
+### BOT_CLASS
+This file contains only the `Bot` class. Robot objects hold information about their decision making parameters/priorities. The class
+functions dictate the decision making process for choosing a move on a given `Board`, according to these parameters. The default strategy is to assign a utility to a given board state based which spaces I control versus which spaces the opponent controls. By assuming the opponent also assesses the board this way, we can predict their best move and give the opponent the worst set of options. Parameters include:
+- Whether to prefer corner and edge spaces, and what score multiplier to assign to those spaces
+- Whether the bot will skip repeatedly before eventually giving up and making a move (Patience)
+- A special parameter to _turn off_ the bot's brain and choose a legal move at random
+- How deeply to think, i.e. how far ahead to look in the game when considering the opponent's movement opportunities (`depth=0` is just counting tiles on the board)
+The tought process of the robot includes:
+- Simply counting the tiles on the board, and using score multipliers to assess a `pureutility` of the board
+- Finding the _long term_ utility of a move by assuming the opponent will make the best move
+  - This is recursive, because the bot assumes that the opponent will assume that they will make the best move. This layered assumption goes down as deep as the `depth` parameter, when eventually all possible paths are explored for the next `depth` moves.
+- Finally, by knowing long term utilities of the board after each possible move, choose the move with the best long term utility, given a board setup
+#### VECTOR_CLASS
+This only contains the `Vector` class. It allows for slightly nicer manipulations of coordinates, with the functionality of adding and scaling points. It is not all necessary for this project.
+#### SETTINGS
+This file holds a tuple of the in-game settings from the **Settings** page. This way, you can close and reopen the game without the settings resetting every time.
