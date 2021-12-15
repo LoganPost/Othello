@@ -80,7 +80,7 @@ The tought process of the robot includes:
 - Finding the _long term_ utility of a move by assuming the opponent will make the best move
   - This is recursive, because the bot assumes that the opponent will assume that they will make the best move. This layered assumption goes down as deep as the `depth` parameter, when eventually all possible paths are explored for the next `depth` moves.
 - Finally, by knowing long term utilities of the board after each possible move, choose the move with the best long term utility, given a board setup
-#### VECTOR_CLASS
+#### [VECTOR_CLASS](Vector_Class.py)
 This only contains the `Vector` class. It allows for slightly nicer manipulations of coordinates, with the functionality of adding and scaling points. It is not all necessary for this project.
 #### SETTINGS
 This file holds a tuple of the in-game settings from the **Settings** page. This way, you can close and reopen the game without the settings resetting every time.
